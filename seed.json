@@ -1,0 +1,116 @@
+{
+    "app": "campus life planner",
+    "version": 1,
+    "activities": [
+        {
+            "id": "rec_1001",
+            "title": "Python Study Session",
+            "category": "Study",
+            "date": "2026-10-15",
+            "time": "09:00",
+            "priority": "high",
+            "description": "Practise Python functions and loops.",
+            "status": "planned",
+            "createdAt": "2026-10-10T08:00:00.000Z"
+        },
+        {
+            "id": "rec_1002",
+            "title": "Database Assignment",
+            "category": "Assignment",
+            "date": "2026-10-15",
+            "time": "14:00",
+            "priority": "high",
+            "description": "Finish the database queries.",
+            "status": "planned",
+            "createdAt": "2026-10-10T08:30:00.000Z"
+        },
+        {
+            "id": "rec_1003",
+            "title": "Group Project Meeting",
+            "category": "Meeting",
+            "date": "2026-10-16",
+            "time": "10:00",
+            "priority": "medium",
+            "description": "Discuss project tasks with the group.",
+            "status": "planned",
+            "createdAt": "2026-10-10T09:30:00.000Z"
+        },
+        {
+            "id": "rec_1004",
+            "title": "Read Course Notes",
+            "category": "Study",
+            "date": "2026-10-17",
+            "time": "11:00",
+            "priority": "low",
+            "description": "Review the notes from class.",
+            "status": "planned",
+            "createdAt": "2026-10-10T08:30:00.000Z"
+        },
+        {
+            "id": "rec_1005",
+            "title": "Submit Essay",
+            "category": "Assignment",
+            "date": "2026-10-18",
+            "time": "16:00",
+            "priority": "high",
+            "description": "Check references before submitting.",
+            "status": "planned",
+            "createdAt": "2026-10-10T10:00:00.000Z"
+        },
+        {
+            "id": "rec_1006",
+            "title": "Football Practice",
+            "category": "Sports",
+            "date": "2026-10-19",
+            "time": "17:00",
+            "priority": "medium",
+            "description": "Attend campus football practice.",
+            "status": "planned",
+            "createdAt": "2026-10-10T10:30:00.000Z"
+        },
+        {
+            "id": "rec_1007",
+            "title": "Library Research",
+            "category": "Study",
+            "date": "2026-10-20",
+            "time": "13:00",
+            "priority": "medium",
+            "description": "Find sources for the next assignment.",
+            "status": "planned",
+            "createdAt": "2026-10-10T11:30:00.000Z"
+        },
+        {
+            "id": "rec_1008",
+            "title": "Career Workshop",
+            "category": "Career",
+            "date": "2026-10-21",
+            "time": "10:30",
+            "priority": "medium",
+            "description": "Learn about CVs and interviews.",
+            "status": "planned",
+            "createdAt": "2026-10-10T11:30:00.000Z"
+        },
+        {
+            "id": "rec_1009",
+            "title": "Club Planning Meeting",
+            "category": "Meeting",
+            "date": "2026-10-22",
+            "time": "15:00",
+            "priority": "low",
+            "description": "Plan activities for the campus club.",
+            "status": "planned",
+            "createdAt": "2026-10-10T12:00:00.000Z"
+        },
+        {
+            "id": "rec_1010",
+            "title": "Complete UI Project",
+            "category": "Assignment",
+            "date": "2026-10-23",
+            "time": "12:00",
+            "priority": "high",
+            "description": "Test the responsive website.",
+            "status": "completed",
+            "createdAt": "2026-10-10T12:30:00.000Z"
+        }
+    ]
+}

@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plan campus activities, assignments, meetings, and study sessions.">
+    <title>Campus Life Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="#home" class="brand">Campus Life Planner</a>
+
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#activities">Activies</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home" class="container">
+
+        <section class="welcome-section">
+            <p class="eyebrow">STUDENT ORGANIZER</p>
+            <h1>Plan your campus life.</h1>
+            <p>
+                Keep track of your assignments, study sessions
+                meetings, and personal activities in one place.
+
+            </p>
+        </section>
+
+        <section id="dashboard" aria-labelledby="dashboard-heading">
+            <h2 id="dashboard-heading">Your Dashboard</h2>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <p>Total activities</p>
+                    <p class="stat-number" id="total-activities">0</p>
+                </article>
+
+                <article class="stat-card">
+                    <p>Completed activities</p>
+                    <p class="stat-number" id="completed-activities">0</p>
+                </article>
+
+                <article class="stat-card">
+                    <p>Upcoming activities</p>
+                    <p class="stat-number" id="upcoming-activities">0</p>
+                </article>
+
+                <article class="stat-card">
+                    <p>Top category</p>
+                    <p class="stat-number" id="top-category">None yet</p>
+                </article>
+                 <article class="stat-card">
+                    <button id="dark-mode-toggle" type="button" aria-pressed="false">
+    Dark Mode
+</button>
+                 </article>
+            </div>
+
+            <article class="panel">
+                <h3>Next seven days</h3>
+                <p class="muted">
+                    Number of activities planned for each day.
+                </p>
+                <div id="weekly-trend" class="weekly-trend"></div>
+            </article>
+        </section>
+
+        <section class="planner-layout" aria-label="Activity planner">
+
+            <section class="panel" id="add-activity">
+                <h2 id="form-heading">Add a new activity</h2>
+                <p class="muted">
+                    Fill in the details below to plan an activity,.
+                </p>
+
+                <form id="activity-form">
+                    <input type="hidden" id="activity-id">
+
+                    <div class="form-group">
+                        <label for="title">Activity title</label>
+                        <input
+                            id="title"
+                            name="title"
+                            type="text"
+                            minlength="3"
+                            maxlength="80"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="">Choose a category</option>
+                            <option value="Study">Study</option>
+                            <option value="Assignment">Assignment</option>
+                            <option value="Meeting">Meeting</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Career">Career</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input
+                                id="date"
+                                name="date"
+                                type="date"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input
+                                id="time"
+                                name="time"
+                                type="time"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <select id="priority" name="priority" required>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">
+                            Description  (optional)
+                        </label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="3"
+                            maxlength="300"
+                            placeholder="Add a few details"></textarea>
+                    </div>
+
+                    <div
+                        id="form-message"
+                        class="message"
+                        role="status"
+                        aria-live="polite">
+                    </div>
+
+                    <div class="button-row">
+                        <button
+                            type="submit"
+                            id="submit-button-primary"
+                            class="button button-primary">
+                            Save activity
+                        </button>
+
+                        <button
+                            type="button"
+                            id="reset-form"
+                            class="button button-secondary">
+                            Clear form
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="panel" id="activities">
+                <h2>Your Activities</h2>
+                <p class="muted">
+                    Search, sort, edit, or update your activities.
+                </p>
+
+                <div class="form-group">
+                    <label for="search-input">
+                        Search activities or use a regular expression
+                    </label>
+
+                    <input
+                          id="search-input"
+                          type="search"
+                          placeholder="e.g. exam|meeting"
+                          aria-describedby="search-help">
+
+                          <p class="small-help" id="search-help">
+                            Example:
+                            <code>exam|meeting</code>
+                            finds activities
+                            containing "exam" or "meeting".
+                          </p>
+                    <div
+                        id="search-message"
+                        class="message"
+                        role="status"
+                        aria-live="polite"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sort-select">Sort activities by</label>
+                    <select id="sort-select">
+                        <option value="date-asc">Date: earliest first</option>
+                        <option value="date-desc">Date: latest first</option>
+                        <option value="title-asc">Title: A to Z</option>
+                        <option value="priority">Priority: high first</option>
+                    </select>
+                </div>
+
+                <div
+                    id="activity-list"
+                    class="activity-list"
+                    aria-live="polite">
+                    <p class="muted">
+                        Your activities will appear here. 
+                    </p>
+                </div>
+            </section>
+        </section>
+
+        <section id="settings" class="panel settings-panel">
+            <h2>Goals and data</h2>
+
+            <div class="settings-grid">
+
+                <section>
+                    <h3>Completion target</h3>
+                    <p class="muted">
+                        Choose how many activities you want to complete.
+                    </p>
+
+                    <div class="form-group">
+                        <label for="target-input">Target number</label>
+                        <input
+                            id="target-input"
+                            type="number"
+                            min="1"
+                            max="1000000"
+                            value="5">
+                    </div>
+
+                    <button
+                        id="save-target"
+                        type="button"
+                        class="button button-primary">
+                        Save target
+                    </button>
+
+                    <div
+                        id="target-message"
+                        class="message"
+                        role="status"
+                        aria-live="polite">
+                    </div>
+
+                    <progress
+                           id="target-progress"
+                           value="0"
+                           max="100">0%
+                        </progress>
+
+                    <p id="target-status"aria-live="polite">
+                        0 activities completed
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Import and export</h3>
+                    <p class="muted">
+                        Export your activities to a JSON file or import a JSON file.
+                    </p>
+
+                    <div class="button-stack">
+                        <button
+                            id="export-button"
+                            type="button"
+                            class="button button-secondary">
+                             Export JSON
+                        </button>
+                        
+                        <input
+                            id="import-file"
+                            type="file"
+                            accept=".json,application/json"
+                            hidden>
+
+                        <button
+                            id="import-button"
+                            type="button"
+                            class="button button-secondary">
+                            Import JSON
+                        </button>
+                    </div>
+
+                    <div
+                        id="import-message"
+                        class="message"
+                        role="status"
+                        aria-live="polite">
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Sample data</h3>
+                    <p class="muted">
+                        Add example activities to explore the planner.
+                    </p>
+
+                    <button
+                        id="load-samples"
+                        type="button"
+                        class="button button-secondary">
+                        Load sample activities
+                    </button>
+                </section>
+
+                <section>
+                    <h3>Clear activities</h3>
+                    <p class="muted">
+                        Delete all activities stored in this browser.
+                    </p>
+
+                    <button
+                        id="clear-all"
+                        type="button"
+                        class="button button-danger">
+                        Clear all activities
+                    </button>
+                </section>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Campus Life Planner - built for student productivity</p>
+            <p>Created by Cynthia Umurerwa &nbsp;|&nbsp;
+               <a href="mailto:c.umurerwa@alustudent.com">c.umurerwa@alustudent.com</a> &nbsp;|&nbsp;
+               GitHub: <a href="https://github.com/cumurerwa-bot" target="_blank" rel="noopener noreferrer">cumurerwa-bot</a>
+            </p>
+            <a href="#home">Back to top</a>
+        </div>
+    </footer>
+</body>
+</html>

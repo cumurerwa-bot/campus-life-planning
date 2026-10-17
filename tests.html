@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Campus Life Planner - Tests</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-content">
+                <a class="brand" href="index.html">Campus Life Planner</a>
+                <nav aria-label="Test page navigation">
+                    <a href="index.html">Back to planner</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container">
+            <section class="welcome-section">
+                <p class="eyebrow">PROJECT QUALITY CHECK</p>
+                <h1>Project tests</h1>
+                <p>These basic tests check important validation and regular-expression rules.</p>
+            </section>
+
+            <section class="panel">
+                <h2>Test results</h2>
+                <p id="test-summary" role="status" aria-live="polite">Running tests…</p>
+                <ul id="test-results"></ul>
+                <button id="run-tests" class="button button-primary" type="button">
+                    Run tests again
+                </button>
+            </section>
+        </main>
+
+        <script>
+            "use strict";
+
+            // ── Patterns (same as script.js) ──────────────────────────────────
+            const titlePattern = /^(?=.{3,80}$)[A-Za-z0-9](?:[A-Za-z0-9 '\-]*[A-Za-z0-9])?$/;
+
+            const descriptionPattern = /^[A-Za-z0-9\s.,!?'"():;\-]{0,300}$/;
+
+            const timePattern = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+
+            const categoryPattern = /^[A-Za-z ]{2,30}$/;
+
+            const repeatedWordPattern = /\b([A-Za-z]+)\b(?:\s+\1\b)/i;
+
+            const digitLookaheadPattern = /^(?=.*\d).+$/;
+
+            // ── isValidDate helper ─────────────────────────────────────────────
+            function isValidDate(dateString) {
+                if (typeof dateString !== "string") { return false; }
+                if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) { return false; }
+
+                const date = new Date(dateString + "T00:00:00");
+
+                return (
+                    !Number.isNaN(date.getTime()) &&
+                    date.getFullYear()  === Number(dateString.slice(0, 4)) &&
+                    date.getMonth() + 1 === Number(dateString.slice(5, 7)) &&
+                    date.getDate()      === Number(dateString.slice(8, 10))
+                );
+            }
+
+            // ── Test suite ────────────────────────────────────────────────────
+            function runTests() {
+                const tests = [
+                    {
+                        name:   "Accepts a valid activity title",
+                        passed: titlePattern.test("Python Assignment")
+                    },
+                    {
+                        name:   "Rejects a title that is too short",
+                        passed: !titlePattern.test("Hi")
+                    },
+                    {
+                        name:   "Rejects unsupported title symbols",
+                        passed: !titlePattern.test("study <today>")
+                    },
+                    {
+                        name:   "Accepts a valid category",
+                        passed: categoryPattern.test("Assignment")
+                    },
+                    {
+                        name:   "Rejects a category containing numbers",
+                        passed: !categoryPattern.test("study123")
+                    },
+                    {
+                        name:   "Accepts a valid 24-hour time",
+                        passed: timePattern.test("14:30")
+                    },
+                    {
+                        name:   "Rejects an invalid time",
+                        passed: !timePattern.test("25:75")
+                    },
+                    {
+                        name:   "Accepts a valid calendar date",
+                        passed: isValidDate("2026-10-15")
+                    },
+                    {
+                        name:   "Rejects an impossible calendar date",
+                        passed: !isValidDate("2026-02-30")
+                    },
+                    {
+                        name:   "Accepts a normal description",
+                        passed: descriptionPattern.test("Read the course notes.")
+                    },
+                    {
+                        name:   "Back-reference detects a repeated word",
+                        passed: repeatedWordPattern.test("study study")
+                    },
+                    {
+                        name:   "Back-reference does not flag different words",
+                        passed: !repeatedWordPattern.test("study assignment")
+                    },
+                    {
+                        name:   "Positive lookahead finds a digit",
+                        passed: digitLookaheadPattern.test("student123")
+                    },
+                    {
+                        name:   "Positive lookahead rejects text without a digit",
+                        passed: !digitLookaheadPattern.test("student")
+                    }
+                ];
+
+                const resultsList = document.getElementById("test-results");
+                const summary     = document.getElementById("test-summary");
+
+                resultsList.replaceChildren();
+
+                let passedCount = 0;
+
+                tests.forEach((test) => {
+                    const item = document.createElement("li");
+                    item.textContent = `${test.passed ? "✅ PASS" : "❌ FAIL"} — ${test.name}`;
+                    item.style.color = test.passed ? "#087443" : "#b42318";
+                    resultsList.appendChild(item);
+                    if (test.passed) { passedCount++; }
+                });
+
+                summary.textContent = `${passedCount} of ${tests.length} tests passed.`;
+            }
+
+            document.getElementById("run-tests").addEventListener("click", runTests);
+
+            runTests();
+        </script>
+    </body>
+</html>
