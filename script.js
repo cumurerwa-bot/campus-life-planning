@@ -43,7 +43,7 @@ const formHeading = document.getElementById("form-heading");
 
 const darkModeToggle = document.getElementById("dark-mode-toggle");
 
-// ── PATTERNS ────────────────────────────────────────────────────────────────
+
 
 const titlepattern =
     /^(?=.{3,80}$)[A-Za-z0-9](?:[A-Za-z0-9 '\-]*[A-Za-z0-9])?$/;
@@ -57,7 +57,7 @@ const timepattern =
 const categorypattern =
     /^[A-Za-z ]{2,30}$/;
 
-// ── UTILITIES ────────────────────────────────────────────────────────────────
+
 
 function escapeHTML(value) {
     return String(value ?? "")
@@ -118,7 +118,7 @@ function isCompleted(activity) {
     return activity.status === "completed";
 }
 
-// ── DARK MODE ────────────────────────────────────────────────────────────────
+
 
 function applyDarkMode(isDark) {
     document.body.classList.toggle("dark-mode", isDark);
@@ -140,7 +140,7 @@ function handleDarkModeToggle() {
     localStorage.setItem("darkMode", String(next));
 }
 
-// ── VALIDATION ───────────────────────────────────────────────────────────────
+
 
 function validateRecord(record) {
     const errors = [];
@@ -234,7 +234,7 @@ function validateForm() {
     return errors;
 }
 
-// ── STORAGE ──────────────────────────────────────────────────────────────────
+
 
 function saveActivities() {
     try {
@@ -295,7 +295,7 @@ function loadTarget() {
     }
 }
 
-// ── FORM ─────────────────────────────────────────────────────────────────────
+
 
 function handleFormSubmit(event) {
     event.preventDefault();
@@ -371,7 +371,7 @@ function handleResetForm() {
     clearMessage(formmessage);
 }
 
-// ── EDIT / DELETE / TOGGLE ───────────────────────────────────────────────────
+
 
 function editActivity(id) {
     const activity = activities.find((item) => item.id === id);
@@ -441,7 +441,7 @@ function toggleActivityStatus(id) {
     renderAll();
 }
 
-// ── SEARCH & SORT ────────────────────────────────────────────────────────────
+
 
 function searchActivities(records, searchText) {
     const query = searchText.trim();
@@ -529,7 +529,7 @@ function sortActivities(records, sortValue) {
     return sorted;
 }
 
-// ── RENDER ───────────────────────────────────────────────────────────────────
+
 
 function renderActivities() {
     if (!activitylist) return;
@@ -640,7 +640,7 @@ function handleActivityListClick(event) {
     }
 }
 
-// ── STATS ────────────────────────────────────────────────────────────────────
+
 
 function renderStats() {
     if (totalActivities) totalActivities.textContent = activities.length;
@@ -732,7 +732,7 @@ function renderWeeklyTrend() {
         .join("");
 }
 
-// ── TARGET ───────────────────────────────────────────────────────────────────
+
 
 function updateTargetDisplay() {
     const target = loadTarget();
@@ -774,7 +774,7 @@ function handleSaveTarget() {
     showMessage(targetmessage, "Target saved!", "success");
 }
 
-// ── EXPORT / IMPORT ──────────────────────────────────────────────────────────
+
 
 function exportActivities() {
     if (activities.length === 0) {
@@ -871,7 +871,7 @@ function handleImportFile(event) {
     reader.readAsText(file);
 }
 
-// ── SAMPLE DATA ──────────────────────────────────────────────────────────────
+
 
 function loadSampleActivities() {
     const confirmed = window.confirm(
@@ -1008,7 +1008,7 @@ function clearAllActivities() {
     showMessage(formmessage, "All activities have been deleted.", "success");
 }
 
-// ── RENDER ALL ───────────────────────────────────────────────────────────────
+
 
 function renderAll() {
     renderActivities();
@@ -1016,7 +1016,7 @@ function renderAll() {
     updateTargetDisplay();
 }
 
-// ── EVENT LISTENERS ──────────────────────────────────────────────────────────
+
 
 function attachEventListeners() {
     activityform.addEventListener("submit", handleFormSubmit);
@@ -1064,7 +1064,7 @@ function attachEventListeners() {
     }
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
+
 
 function initApp() {
     initDarkMode();
