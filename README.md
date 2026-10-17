@@ -5,6 +5,10 @@ campus life planner is a responsive website that helps students organize their c
 
 the website is designed to work on mobile phones,tablets, and desktop computers.
 
+## live project
+**project url:** https://cumurerwa-bot.github.io/campus-life-planning/
+**demo video:**
+
 2.main features
 
 - Add new activities.
