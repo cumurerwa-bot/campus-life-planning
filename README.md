@@ -7,7 +7,8 @@ the website is designed to work on mobile phones,tablets, and desktop computers.
 
 ## live project
 **project url:** https://cumurerwa-bot.github.io/campus-life-planning/
-**demo video:**
+
+**demo video:**https://youtu.be/vlxsCbGlXrI
 
 2.main features
 
